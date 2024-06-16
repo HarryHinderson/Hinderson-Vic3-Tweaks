@@ -1,0 +1,135 @@
+﻿namespace = hinder_events
+
+hinder_events.1 = {
+    type = country_event
+    placement = scope:je_owned_zululand
+    title = hinder_events.1.t
+    desc = hinder_events.1.d
+    flavor = hinder_events.1.f
+    
+    duration = 3
+
+    event_image = {
+        video = "gfx/event_pictures/unspecific_military_parade.bk2"
+    }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+    trigger = {
+    	#Triggered from the journal entry
+    }
+
+    immediate = {
+    	create_country = {
+    		tag = NAL
+    		origin = root
+    		state = scope:je_owned_zululand
+    	}
+    	s:STATE_ZULULAND = {
+    		add_homeland = cu:boer
+    	}
+    }
+
+    option = {      
+        name = hinder_events.1.a
+        default_option = yes
+        change_relations = {
+        	country = c:NAL 
+        	value = 50
+        }
+        hidden_effect = {
+			c:NAL ?= {
+				set_mutual_secret_goal = {
+					country = root
+					secret_goal = befriend
+				}
+			}
+		}
+        ai_chance = { base = 100 }
+    }
+    option = {      
+        name = hinder_events.1.b
+        create_diplomatic_pact = {
+        	country = c:NAL 
+        	type = puppet
+        }
+        ai_chance = { base = 10 }
+    }
+    option = {      
+        name = hinder_events.1.c
+        trigger = {
+        	is_player = yes
+        }
+        change_relations = {
+        	country = c:NAL 
+        	value = 50
+        }
+        play_as = c:NAL
+    }
+}
+hinder_events.2 = {
+    type = country_event
+    placement = root
+    title = hinder_events.2.t
+    desc = hinder_events.2.d
+    flavor = hinder_events.2.f
+    
+    duration = 3
+
+    event_image = {
+        video = "gfx/event_pictures/unspecific_military_parade.bk2"
+    }
+
+    icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+    on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    on_opened_soundeffect = "event:/SFX/Events/unspecific/gears_pistons"
+
+    trigger = {
+        #By decision
+    }
+
+    option = {      
+        name = hinder_events.2.a
+        default_option = yes
+        set_capital = STATE_BRANDENBURG
+        if = {
+            limit = {
+                NOT = { owns_entire_state_region = STATE_POMERANIA }
+            }
+            s:STATE_POMERANIA = {
+                add_claim = ROOT
+            }
+        }
+        if = {
+            limit = {
+                NOT = { owns_entire_state_region = STATE_SILESIA }
+            }
+            s:STATE_SILESIA = {
+                add_claim = ROOT
+            }
+        }
+        if = {
+            limit = {
+                NOT = { owns_entire_state_region = STATE_WEST_PRUSSIA }
+            }
+            s:STATE_WEST_PRUSSIA = {
+                add_claim = ROOT
+            }
+        }
+        if = {
+            limit = {
+                NOT = { owns_entire_state_region = STATE_EAST_PRUSSIA }
+            }
+            s:STATE_EAST_PRUSSIA = {
+                add_claim = ROOT
+            }
+        }
+        add_modifier = {
+            name = prussian_capital_restored
+            months = 36
+        }
+    }
+}

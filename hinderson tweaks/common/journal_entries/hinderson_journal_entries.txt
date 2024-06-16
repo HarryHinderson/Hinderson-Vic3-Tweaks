@@ -1,0 +1,141 @@
+﻿je_colonial_administration = {
+	icon = "gfx/interface/icons/invention_icons/colonization.dds"
+	
+	group = je_group_foreign_affairs
+
+	is_shown_when_inactive = {
+		country_is_in_africa = no
+		OR = {
+			has_interest_marker_in_region = sr:region_senegal
+			has_interest_marker_in_region = sr:region_niger
+			has_interest_marker_in_region = sr:region_ethiopia
+			has_interest_marker_in_region = sr:region_zanj
+			has_interest_marker_in_region = sr:region_southern_africa
+			has_interest_marker_in_region = sr:region_congo
+		}
+	}
+
+	possible = {
+		any_scope_state = {
+			state_is_in_africa = yes
+		}
+		OR = {
+			has_technology_researched = civilizing_mission
+			any_subject_or_below = {
+				has_variable = southern_africa_subject_var
+			}
+		}
+		
+	}
+
+	immediate = {
+		random_state_region = {
+			limit = {
+				region = sr:region_senegal
+			}
+			save_scope_as = senegal_region_scope
+		}
+		random_state_region = {
+			limit = {
+				region = sr:region_niger
+			}
+			save_scope_as = niger_region_scope
+		}
+		random_state_region = {
+			limit = {
+				region = sr:region_ethiopia
+			}
+			save_scope_as = ethiopia_region_scope
+		}
+		random_state_region = {
+			limit = {
+				region = sr:region_zanj
+			}
+			save_scope_as = zanj_region_scope
+		}
+		random_state_region = {
+			limit = {
+				region = sr:region_southern_africa
+			}
+			save_scope_as = southern_africa_region_scope
+		}
+		random_state_region = {
+			limit = {
+				region = sr:region_congo
+			}
+			save_scope_as = congo_region_scope
+		}
+	}
+	
+	# Establish Colonial Administration
+	scripted_button = je_colonial_administration_button_senegal
+	scripted_button = je_colonial_administration_button_niger
+	scripted_button = je_colonial_administration_button_ethiopia
+	scripted_button = je_colonial_administration_button_zanj
+	scripted_button = je_colonial_administration_button_southern_africa
+	scripted_button = je_colonial_administration_button_congo
+
+	# Expand Colonial Administration
+	scripted_button = je_colonial_administration_button_expand_senegal
+	scripted_button = je_colonial_administration_button_expand_niger
+	scripted_button = je_colonial_administration_button_expand_ethiopia
+	scripted_button = je_colonial_administration_button_expand_zanj
+	scripted_button = je_colonial_administration_button_expand_southern_africa
+	scripted_button = je_colonial_administration_button_expand_congo
+
+	weight = 100
+
+	should_be_pinned_by_default = yes
+}
+
+je_boer_republics = {
+	icon = "gfx/interface/icons/invention_icons/colonization.dds"
+
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		NOT = { has_variable = new_republic_var }
+		country_has_primary_culture = cu:boer
+		NOT = {
+			country_has_primary_culture = cu:british
+			country_has_primary_culture = cu:scottish
+			country_has_primary_culture = cu:welsh
+		}
+		NOT = {
+			exists = c:NAL
+		}
+		country_is_in_africa = yes
+	}
+
+	possible = {
+		NOT = {
+			OR = {
+				has_law = law_type:law_multicultural
+				has_law = law_type:law_cultural_exclusion
+			}
+		}
+		is_subject = no
+	}
+
+	complete = {
+		is_at_war = no
+		any_scope_state = {
+			state_region = s:STATE_ZULULAND
+			is_capital = no
+		}
+	}
+
+	on_complete = {
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_ZULULAND
+			}
+			save_scope_as = je_owned_zululand
+		}
+		set_global_variable = new_republic_var
+		trigger_event = {
+			id = hinder_events.1
+			popup = yes
+		}
+	}
+}

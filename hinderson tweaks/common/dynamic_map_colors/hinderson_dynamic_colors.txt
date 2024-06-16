@@ -1,0 +1,12 @@
+﻿saudi_arabia = { # Nejd
+	color = "green_dark"
+
+	possible = {
+		exists = c:NEJ
+		THIS = c:NEJ
+		coa_def_monarchy_flag_trigger = yes
+		scope:actor = {
+			owns_entire_state_region = STATE_HEDJAZ
+		}
+	}
+}
