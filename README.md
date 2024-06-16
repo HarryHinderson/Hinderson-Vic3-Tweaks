@@ -1,5 +1,4 @@
-# Hinderson-Vic3-Tweaks
-A Victoria 3 mod changing/adding a bunch of small things
+# Hinderson's Victoria 3 Tweaks
 
 This is just a small mod I developed to change some things I think are dumb. 
 
